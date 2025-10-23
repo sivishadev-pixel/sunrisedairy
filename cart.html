@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunrise Dairy | Checkout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="cart.js" defer></script>
+  <style>
+    :root {
+      --primary-green: #0b4d2c;
+      --accent-gold: #d4a017;
+      --light-bg: #f9faf8;
+      --card-bg: #ffffff;
+      --text-dark: #222;
+      --border-color: #eaeaea;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--light-bg);
+      color: var(--text-dark);
+    }
+
+    /* HEADER */
+    header {
+      background: var(--card-bg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 15px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header img {
+      height: 65px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-green);
+      margin: 0 20px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    #hamburger {
+      display: none;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: var(--primary-green);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      #hamburger { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 20px;
+      }
+      .nav-links.active { display: flex; }
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      padding: 60px 20px;
+    }
+
+    /* CART SECTION */
+    .cart-container, .form-container {
+      flex: 1;
+      min-width: 350px;
+      max-width: 500px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      padding: 30px;
+      transition: transform 0.2s ease;
+    }
+
+    .cart-container:hover, .form-container:hover {
+      transform: translateY(-4px);
+    }
+
+    .cart-container h2, .form-container h2 {
+      text-align: center;
+      color: var(--primary-green);
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+
+    .cart-item img {
+      width: 70px;
+      border-radius: 8px;
+    }
+
+    .cart-item-details {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .cart-item-details h4 {
+      font-size: 1rem;
+      color: var(--primary-green);
+      margin-bottom: 4px;
+    }
+
+    .cart-item-details p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    #total {
+      text-align: right;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+      margin-top: 15px;
+    }
+
+    /* FORM SECTION */
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent-gold);
+      outline: none;
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    /* Payment Options */
+    .payment-options {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin: 10px 0 25px;
+      justify-content: center;
+    }
+
+    .payment-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .payment-options input[type="radio"] {
+      accent-color: var(--primary-green);
+      width: 18px;
+      height: 18px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary-green), #15894e);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(11, 77, 44, 0.25);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary-green);
+      color: white;
+      text-align: center;
+      padding: 40px 20px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 60px;
+      margin-bottom: 30px;
+    }
+
+    .footer-logo img {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      margin: 5px 0;
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 0.8;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 10px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="./images/logo.png" alt="Sunrise Dairy Logo">
+    <button id="hamburger" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <nav id="navLinks" class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart</a>
+      <a href="t&c.html">Terms</a>
+      <a href="privacy-policy.html">Privacy</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Cart Section -->
+    <section class="cart-container">
+      <h2>Your Cart</h2>
+      <div id="cart-items">
+        <div class="cart-item">
+          <img src="./images/product1.jpg" alt="Product Image">
+          <div class="cart-item-details">
+            <h4>Ayurvedic Oil</h4>
+            <p>₹599</p>
+          </div>
+        </div>
+      </div>
+      <p id="total">Total: ₹599</p>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-container">
+      <h2>Delivery Details</h2>
+      <form id="order-form">
+        <input name="name" placeholder="Your Full Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input name="phone" placeholder="Your Phone" required>
+        <input name="pincode" placeholder="Area PIN Code" required pattern="[0-9]{6}">
+        <textarea name="address" placeholder="Full Delivery Address" required></textarea>
+
+        <div class="payment-options">
+          <label><input type="radio" name="payment_method" value="Online" checked> Prepaid (Razorpay)</label>
+          <label><input type="radio" name="payment_method" value="COD"> Cash on Delivery</label>
+        </div>
+
+        <button type="submit">Proceed to Secure Payment</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="./images/logo.png" alt="Logo">
+        <p>Sunrise Dairy</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="t&c.html">Terms & Conditions</a>
+      </div>
+      <div>
+        <p>📞 +91 6395844267</p>
+        <p>📧 <a href="mailto:sunrisedairy001@gmail.com" style="color:white;">sunrisedairy001@gmail.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Sunrise Dairy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active'));
+    });
+  </script>
+</body>
+</html>

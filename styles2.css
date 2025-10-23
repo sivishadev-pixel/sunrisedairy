@@ -1,0 +1,204 @@
+/* Common styles for Privacy Policy and Terms & Conditions pages */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fdf7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: #121c13;
+    padding: 20px 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover,
+  nav a:focus {
+    color: #c8e6c9;
+  }
+  
+  main.policy-content {
+    max-width: 900px;
+    margin: 40px auto 60px;
+    background: white;
+    padding: 40px 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+  }
+  
+  main.policy-content h2 {
+    color: #2e7d32;
+    font-weight: 700;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #4caf50;
+    padding-bottom: 8px;
+    font-size: 2.2rem;
+  }
+  
+  main.policy-content h3 {
+    margin-top: 30px;
+    color: #388e3c;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+  
+  main.policy-content p,
+  main.policy-content ul {
+    font-size: 1rem;
+    margin-top: 15px;
+    color: #444;
+  }
+  
+  main.policy-content ul {
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+  
+  main.policy-content ul li {
+    margin-bottom: 10px;
+  }
+  
+  strong {
+    color: #2e7d32;
+  }
+  
+  @media (max-width: 600px) {
+    header {
+      padding: 15px 20px;
+    }
+  
+    main.policy-content {
+      padding: 25px 20px;
+      margin: 20px 15px 40px;
+    }
+  
+    nav a {
+      margin-left: 12px;
+      font-size: 0.9rem;
+    }
+  
+    main.policy-content h2 {
+      font-size: 1.6rem;
+    }
+  
+    main.policy-content h3 {
+      font-size: 1.2rem;
+    }
+  }
+  
+
+  
+  .site-footer {
+    background-color: #0c140c;
+    color: #ffffff;
+    padding: 3em 1em 1em;
+    font-size: 0.95em;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2em;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .footer-logo {
+    flex: 1 1 200px;
+  }
+  
+  .footer-logo img {
+    width: 80px;
+    margin-bottom: 0.5em;
+  }
+  
+  .footer-logo p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #a5d6a7;
+  }
+  
+  .footer-links,
+  .footer-contact,
+  .footer-social {
+    flex: 1 1 200px;
+  }
+  
+  .footer-links h4,
+  .footer-contact h4,
+  .footer-social h4 {
+    margin-bottom: 0.5em;
+    color: #a5d6a7;
+  }
+  
+  .footer-links a,
+  .footer-social a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0.3em 0;
+  }
+  
+  .footer-links a:hover,
+  .footer-social a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-contact p,
+  .footer-contact a {
+    margin: 0.3em 0;
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .footer-contact a:hover {
+    color: #ffffff;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 1em;
+    border-top: 1px solid #2e7d32;
+    margin-top: 2em;
+    color: #ccc;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  
+    .footer-logo,
+    .footer-links,
+    .footer-contact,
+    .footer-social {
+      flex: 1 1 100%;
+    }
+  }
+  
