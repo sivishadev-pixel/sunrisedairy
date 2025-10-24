@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
       submitToSheet(); // Use 'COD' as fake payment ID
     } else {
       const razorpayOptions = {
-        key: "rzp_live_txdpgO15ZeYtHX",
+        key: "rzp_live_RXKFlnXrgJb2OU",
         amount: total * 100,
         currency: "INR",
         name: "Ayurveda Wellness",
