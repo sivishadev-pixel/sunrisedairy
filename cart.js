@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         key: "rzp_live_RXKFlnXrgJb2OU",
         amount: total * 100,
         currency: "INR",
-        name: "Ayurveda Wellness",
+        name: "Sunrise Dairy",
         description: "Order Payment",
         handler: function (response) {
           submitToSheet(response.razorpay_payment_id);
